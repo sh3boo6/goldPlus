@@ -9,6 +9,14 @@
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/(.+)\\.(js|css|json|map|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|wasm)",
+      "dest": "/$1.$2"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html",
+      "methods": ["GET", "HEAD"]
+    }
   ]
 }
