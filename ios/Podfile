@@ -1,0 +1,47 @@
+# ios/Podfile
+
+# Uncomment this line to set the minimum CocoaPods version.
+# Pod::VERSION.max_greater_than_or_equal_to! '1.13.0'
+
+platform :ios, '13.0'
+
+# CocoaPods analytics sends build metrics to a backend.
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+def flutter_root
+  unless ENV['FLUTTER_ROOT']
+    raise 'FLUTTER_ROOT not set'
+  end
+  File.expand_path(ENV['FLUTTER_ROOT'])
+end
+
+def flutter_ios_podfile
+  File.join(flutter_root, '.ios', 'Flutter', 'podhelper.rb')
+end
+
+require flutter_ios_podfile
+
+flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+target 'Runner' do
+  use_frameworks!
+  use_modular_headers!
+
+  flutter_install_all_ios_pods 'Runner'
+
+  target 'RunnerTests' do
+    inherit! :search_paths
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_macos_build_settings(target)
+  end
+end
