@@ -1,0 +1,8 @@
+{
+  "name": "gold_plus",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "vercel-build": "flutter pub get && flutter build web"
+  }
+}
